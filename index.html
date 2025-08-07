@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="HumanGenesis">
+  <meta name="keywords" content="HumanGenesis">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HumanGenesis</title>
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/result.css">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
+
+
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+  <!-- mathjax -->
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<body>
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-2 publication-title">HumanGenesis: Agent-Based Geometric and Generative Modeling for Synthetic
+              Human Dynamics
+            </h1>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <div class="my-hr">
+    <hr>
+  </div>
+
+  <!-- mathjax -->
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        macros: {
+          // You can define custom macros here if needed
+          // ex: R: '\\mathbb{R}'
+        }
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  </script>
+  <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+  <section class="section">
+
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <div class="content has-text-justified">
+              <p>
+                $\textbf{Synthetic human dynamics}$ aims to generate photorealistic videos of human subjects performing expressive, intention-driven motions. However, current approaches face two core challenges: (1) geometric inconsistency and coarse reconstruction, due to limited 3D modeling and detail preservation; and (2) motion generalization limitations and scene inharmonization, stemming from weak generative capabilities. To address these, we present $\textbf{HumanGenesis}$, a framework that integrates geometric and generative modeling through four collaborative agents:
+            (1) $\textbf{Reconstructor}$ builds 3D-consistent human-scene representations from monocular video using 3D Gaussian Splatting and deformation decomposition.
+            (2) $\textbf{Critique Agent}$ enhances reconstruction fidelity by identifying and refining poor regions via multi-round MLLM-based reflection.
+            (3) $\textbf{Pose Guider}$ enables motion generalization by generating expressive pose sequences using time-aware parametric encoders.
+            (4) $\textbf{Video Harmonizer}$ synthesizes photorealistic, coherent video via a hybrid rendering pipeline with diffusion, refining the Reconstructor through a Back-to-4D feedback loop.
+            HumanGenesis achieves state-of-the-art performance on tasks including text-guided synthesis, video reenactment, and novel-pose generalization, significantly improving expressiveness, geometric fidelity, and scene integration.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Method</h2>
+          <div class="content has-text-justified">
+            <p>
+
+            </p>
+          </div>
+          <img src="./static/framework.png" witdh="1000">
+          <p>
+            </span>
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <hr>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3" style="margin-bottom: 30px;">Expressive Human Dynamics</h2>
+        <div> 
+          <video controls autoplay loop muted width="20%">
+            <source src="./humanGenesis/videos/motion_misc_dancing_hiphop_1.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <h2 class="title is-3" style="margin-bottom: 50px; margin-top:50px;">Multi-video consistency on HumanGenesis
+          Dataset</h2>
+
+        <div class="video-container">
+          <video controls autoplay loop muted>
+            <source src="./humanGenesis/videos/mvc_000.mp4" type="video/mp4">
+          </video>
+          <video controls autoplay loop muted>
+            <source src="./humanGenesis/videos/mvc_001.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <h2 class="title is-3" style="margin-bottom: 30px;">Long Video Reenactment</h2>
+        <div> 
+          <video controls autoplay loop muted>
+            <source src="./humanGenesis/videos/first.mp4" type="video/mp4">
+          </video>
+        </div>
+
+
+        <h2 class="title is-3" style="margin-bottom: 30px;">Comparisons</h2>
+        <tr>
+          <video controls autoplay loop muted width="40%">
+            <source src="./humanGenesis/videos/comparison_000.mp4" type="video/mp4">
+          </video>
+          <!-- <video controls autoplay loop muted width="40%">
+            <source src="./humanGenesis/videos/comparison_002.mp4" type="video/mp4">
+          </video> -->
+          <!-- <video controls autoplay loop muted width="40%">
+            <source src="./humanGenesis/videos/comparison_001.mp4" type="video/mp4">
+          </video> -->
+        </tr>
+
+        <h2 class="title is-3" style="margin-bottom: 50px; margin-top:50px;">Animated by unseen motions(e.g.
+          text-generated motion)</h2>
+        <div class="video-container">
+          <video controls autoplay loop muted>
+            <source src="humanGenesis/videos/animation_000.mp4" type="video/mp4">
+          </video>
+        </div>
+
+        <style>
+          .video-container {
+            display: flex;
+            /* 让视频横向排列 */
+            gap: 10px;
+            /* 设置视频间距 */
+            justify-content: center;
+            /* 视频整体居中 */
+          }
+
+          .video-container video {
+            width: 30%;
+            /* 控制视频宽度，保证它们并排 */
+          }
+        </style>
+
+
+        <style>
+          /* 原有样式保持不变 */
+          .video-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+          }
+
+          .video-container video {
+            width: 30%;
+          }
+
+          /* 新增轮播样式 */
+          .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            margin: 0 auto;
+          }
+
+          .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+          }
+
+          .carousel-slide {
+            flex: 0 0 100%;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            padding: 0 10%;
+            box-sizing: border-box;
+          }
+
+          .carousel-slide video {
+            width: 45%;
+            height: auto;
+          }
+
+          .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+          }
+
+          .carousel-btn.prev {
+            left: 10px;
+          }
+
+          .carousel-btn.next {
+            right: 10px;
+          }
+        </style>
+
+        <script>
+          let currentSlide = 0;
+          const slides = document.querySelectorAll('.carousel-slide');
+          const track = document.querySelector('.carousel-track');
+
+          function updateCarousel() {
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+          }
+
+          document.querySelector('.next').addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+          });
+
+          document.querySelector('.prev').addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            updateCarousel();
+          });
+
+          // 自动播放（可选）
+          setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+          }, 13000);
+        </script>
+
+
+      </div>
+    </div>
+
+    <hr>
+
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Reenactment</h2>
+        <div class="slideshow-container"
+          style="display: flex; justify-content: center; align-items: center; position: relative;">
+          <div style="position: relative;">
+            <video class="slide" controls autoplay loop muted style="width: 90%; max-width: 1300px; height: auto;">
+              <source src="./humanGenesis/videos/novel_scene3.mp4" type="video/mp4">
+            </video>
+            <video class="slide" controls autoplay loop muted style="width: 90%; max-width: 1300px; height: auto;">
+              <source src="./humanGenesis/videos/novel_scene1.mp4" type="video/mp4">
+            </video>
+            <video class="slide" controls autoplay loop muted style="width: 90%; max-width: 1300px; height: auto;">
+              <source src="./humanGenesis/videos/novel_scene2.mp4" type="video/mp4">
+            </video>
+            
+
+            <div class="navigation-dots"
+              style="margin-top: 15px; display: flex; justify-content: center; position: relative; z-index: 20;">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+
+            <button class="button prev" onclick="changeSlide(-1)"
+              style="margin-left: -100px;z-index: 10; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
+              &#10094;
+            </button>
+            <button class="button next" onclick="changeSlide(1)"
+              style="margin-right: -100px;z-index: 10; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+              &#10095;
+            </button>
+          </div>
+  </section>
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This website is constructed using the source code provided by <a
+                href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, and we are grateful for the template
+              they provided.
+              Allow us to express our appreciation for their contribution.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let currentSlideIndex = 0;
+
+    function changeSlide(step) {
+      const slides = document.querySelectorAll('.slide');
+      const dots = document.querySelectorAll('.dot');
+
+      slides[currentSlideIndex].style.display = 'none'; // Hide current slide
+      dots[currentSlideIndex].classList.remove('active'); // Remove active class from current dot
+
+      currentSlideIndex = (currentSlideIndex + step + slides.length) % slides.length;
+
+      slides[currentSlideIndex].style.display = 'block'; // Show new slide
+      dots[currentSlideIndex].classList.add('active'); // Add active class to new dot
+    }
+
+    // Initial setup to hide all slides except the first one
+    document.querySelectorAll('.slide').forEach((slide, index) => {
+      slide.style.display = (index === 0) ? 'block' : 'none'; // Show the first slide and hide others
+    });
+
+    // Automatically change slides every 10 seconds
+    setInterval(() => {
+      changeSlide(1);
+    }, 11000); // Change slide every 10 seconds
+
+    // Update display initially
+    document.querySelectorAll('.dot')[currentSlideIndex].classList.add('active'); // Set first dot active
+  </script> -->
+  <!-- </section> -->
+
+</html>
