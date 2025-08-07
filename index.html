@@ -117,7 +117,19 @@
 
             </p>
           </div>
-          <img src="./static/framework.png" witdh="1000">
+          <figure style="text-align: center;">
+            <img src="./static/framework.png" width="1000">
+            <figcaption style="font-size: 0.95em; margin-top: 0.5em;">
+              <strong>Overview of HumanGenesis.</strong>
+              <span style="font-size: 0.9em;">
+                The <strong>Reconstructor</strong> first recovers the 3D human and scene from monocular video by modeling rigid and non-rigid deformations.
+                The <strong>Critique Agent</strong> then evaluates the rendered outputs to identify and refine low-quality regions, enabling fine-grained reconstruction.
+                Next, the <strong>Pose Guider</strong> generates temporally-aware embeddings from novel parametric pose sequences using a time-aware encoder, allowing expressive motion synthesis.
+                Finally, the <strong>Video Harmonizer</strong> leverages Spatial Feature Transform (SFT) within a video diffusion pipeline to produce photorealistic sequences and forms a feedback loop that enhances the Reconstructor’s input.
+              </span>
+            </figcaption>
+          </figure>
+          
           <p>
             </span>
           </p>
