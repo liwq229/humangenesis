@@ -185,174 +185,215 @@
   <hr>
   <div class="columns is-centered has-text-centered">
     <div class="column is-full-width">
-      <h2 class="title is-2" style="font-family: Comic Sans MS; 
-          font-weight: bold; 
-          background: linear-gradient(107deg, orange, yellow, green, blue); 
-          -webkit-background-clip: text; 
-          color: transparent; text-align: center;">Expressive Human Dynamics</h2>
-      <div>
-        <video controls autoplay loop muted width="20%">
-          <source src="./humanGenesis/videos/motion_misc_dancing_hiphop_1.mp4" type="video/mp4">
-        </video>
-      </div>
+      <!-- === HumanGenesis 视频轮播 (替换原来的视频块) === -->
+      <div id="hg-carousel" class="hg-carousel" tabindex="0" data-autoplay="false">
+        <button class="hg-carousel-btn hg-carousel-prev" aria-label="Previous slide">&#10094;</button>
 
-      <h2 class="title is-2" style="font-family: Comic Sans MS; 
-          font-weight: bold; 
-          background: linear-gradient(107deg, orange, yellow, green, blue); 
-          -webkit-background-clip: text; 
-          color: transparent; text-align: center;">Long Video Reenactment</h2>
-      <div>
-        <video controls autoplay loop muted width="70%">
-          <source src="./humanGenesis/videos/first.mp4" type="video/mp4">
-        </video>
-      </div>
+        <div class="hg-carousel-viewport">
+          <div class="hg-carousel-track">
+            <!-- Slide 1 -->
+            <div class="hg-carousel-slide">
+              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
+             background: linear-gradient(107deg, orange, yellow, green, blue);
+             -webkit-background-clip: text; color: transparent; text-align: center;">
+                Expressive Human Dynamics
+              </h2>
+              <video controls muted loop playsinline style="width:40%; max-width:420px;">
+                <source src="./humanGenesis/videos/motion_misc_dancing_hiphop_1.mp4" type="video/mp4">
+              </video>
+            </div>
 
-      <h2 class="title is-2" style="font-family: Comic Sans MS; 
-          font-weight: bold; 
-          background: linear-gradient(107deg, orange, yellow, green, blue); 
-          -webkit-background-clip: text; 
-          color: transparent; text-align: center;">Comparisons</h2>
-      <tr>
-        <video controls autoplay loop muted width="40%">
-          <source src="./humanGenesis/videos/comparison_000.mp4" type="video/mp4">
-        </video>
-      </tr>
+            <!-- Slide 2 -->
+            <div class="hg-carousel-slide">
+              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
+             background: linear-gradient(107deg, orange, yellow, green, blue);
+             -webkit-background-clip: text; color: transparent; text-align: center;">
+                Long Video Reenactment
+              </h2>
+              <video controls muted loop playsinline style="width:70%;">
+                <source src="./humanGenesis/videos/first.mp4" type="video/mp4">
+              </video>
+            </div>
 
-      <h2 class="title is-2" style="font-family: Comic Sans MS; 
-          font-weight: bold; 
-          background: linear-gradient(107deg, orange, yellow, green, blue); 
-          -webkit-background-clip: text; 
-          color: transparent; text-align: center;">Multi-video consistency on HumanVid Dataset</h2>
+            <!-- Slide 3 -->
+            <div class="hg-carousel-slide">
+              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
+             background: linear-gradient(107deg, orange, yellow, green, blue);
+             -webkit-background-clip: text; color: transparent; text-align: center;">
+                Comparisons
+              </h2>
+              <video controls muted loop playsinline style="width:45%; max-width:640px;">
+                <source src="./humanGenesis/videos/comparison_000.mp4" type="video/mp4">
+              </video>
+            </div>
 
-      <div class="video-container">
-        <video controls autoplay loop muted>
-          <source src="./humanGenesis/videos/mvc_000.mp4" type="video/mp4">
-        </video>
-        <video controls autoplay loop muted>
-          <source src="./humanGenesis/videos/mvc_001.mp4" type="video/mp4">
-        </video>
-      </div>
+            <!-- Slide 4: 多视频并排 -->
+            <div class="hg-carousel-slide">
+              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
+             background: linear-gradient(107deg, orange, yellow, green, blue);
+             -webkit-background-clip: text; color: transparent; text-align: center;">
+                Multi-video consistency on HumanVid Dataset
+              </h2>
+              <div class="hg-multi-videos">
+                <video controls muted loop playsinline style="width:40%; max-width:480px;">
+                  <source src="./humanGenesis/videos/mvc_000.mp4" type="video/mp4">
+                </video>
+                <video controls muted loop playsinline style="width:40%; max-width:480px;">
+                  <source src="./humanGenesis/videos/mvc_001.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
 
-      <h2 class="title is-2" style="font-family: Comic Sans MS; 
-          font-weight: bold; 
-          background: linear-gradient(107deg, orange, yellow, green, blue); 
-          -webkit-background-clip: text; 
-          color: transparent; 
-          text-align: center;">
-        Animated by unseen motions
-        <span style="all: unset; font-size: 0.8em; color: black;">
-          (e.g. text-generated motion)
-        </span>
-      </h2>
+            <!-- Slide 5 -->
+            <div class="hg-carousel-slide">
+              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
+             background: linear-gradient(107deg, orange, yellow, green, blue);
+             -webkit-background-clip: text; color: transparent; text-align: center;">
+                Animated by unseen motions
+                <span style="all: unset; font-size: 0.8em; color: black;">(e.g. text-generated motion)</span>
+              </h2>
+              <video controls muted loop playsinline style="width:50%; max-width:640px;">
+                <source src="./humanGenesis/videos/animation_000.mp4" type="video/mp4">
+              </video>
+            </div>
 
-      <div class="video-container">
-        <video controls autoplay loop muted>
-          <source src="humanGenesis/videos/animation_000.mp4" type="video/mp4">
-        </video>
+          </div> <!-- /.hg-carousel-track -->
+        </div> <!-- /.hg-carousel-viewport -->
+
+        <button class="hg-carousel-btn hg-carousel-next" aria-label="Next slide">&#10095;</button>
       </div>
 
       <style>
-        .video-container {
-          display: flex;
-          /* 让视频横向排列 */
-          gap: 10px;
-          /* 设置视频间距 */
-          justify-content: center;
-          /* 视频整体居中 */
-        }
-
-        .video-container video {
-          width: 30%;
-          /* 控制视频宽度，保证它们并排 */
-        }
-      </style>
-
-
-      <style>
-        /* 原有样式保持不变 */
-        .video-container {
-          display: flex;
-          gap: 10px;
-          justify-content: center;
-        }
-
-        .video-container video {
-          width: 30%;
-        }
-
-        /* 新增轮播样式 */
-        .carousel-container {
+        /* 基础样式（尽量加前缀避免冲突） */
+        #hg-carousel {
           position: relative;
           width: 100%;
-          overflow: hidden;
-          margin: 0 auto;
+          margin: 20px 0;
         }
 
-        .carousel-track {
+        #hg-carousel .hg-carousel-viewport {
+          overflow: hidden;
+        }
+
+        #hg-carousel .hg-carousel-track {
           display: flex;
           transition: transform 0.5s ease;
         }
 
-        .carousel-slide {
+        #hg-carousel .hg-carousel-slide {
           flex: 0 0 100%;
+          box-sizing: border-box;
+          padding: 24px;
+          text-align: center;
+        }
+
+        #hg-carousel .hg-multi-videos {
           display: flex;
           gap: 10px;
           justify-content: center;
-          padding: 0 10%;
-          box-sizing: border-box;
+          align-items: center;
+          flex-wrap: wrap;
         }
 
-        .carousel-slide video {
-          width: 45%;
-          height: auto;
-        }
-
-        .carousel-btn {
+        /* 按钮 */
+        .hg-carousel-btn {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
-          background: rgba(0, 0, 0, 0.5);
-          color: white;
+          background: rgba(0, 0, 0, 0.45);
+          color: #fff;
           border: none;
-          padding: 10px;
+          padding: 10px 12px;
           cursor: pointer;
-          z-index: 1;
+          z-index: 9999;
+          border-radius: 6px;
+          font-size: 20px;
         }
 
-        .carousel-btn.prev {
-          left: 10px;
+        .hg-carousel-prev {
+          left: 8px;
         }
 
-        .carousel-btn.next {
-          right: 10px;
+        .hg-carousel-next {
+          right: 8px;
+        }
+
+        /* 保证按钮在移动端不会被其他元素覆盖 */
+        @media (max-width: 768px) {
+          .hg-carousel-btn {
+            padding: 8px 10px;
+            font-size: 18px;
+          }
+
+          #hg-carousel .hg-carousel-slide {
+            padding: 14px;
+          }
         }
       </style>
 
       <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-        const track = document.querySelector('.carousel-track');
+        document.addEventListener('DOMContentLoaded', () => {
+          const carousel = document.getElementById('hg-carousel');
+          if (!carousel) return;
 
-        function updateCarousel() {
-          track.style.transform = `translateX(-${currentSlide * 100}%)`;
-        }
+          const track = carousel.querySelector('.hg-carousel-track');
+          const slides = Array.from(carousel.querySelectorAll('.hg-carousel-slide'));
+          const prevBtn = carousel.querySelector('.hg-carousel-prev');
+          const nextBtn = carousel.querySelector('.hg-carousel-next');
 
-        document.querySelector('.next').addEventListener('click', () => {
-          currentSlide = (currentSlide + 1) % slides.length;
-          updateCarousel();
+          if (!track || slides.length === 0 || !prevBtn || !nextBtn) {
+            console.warn('[HG Carousel] 初始化失败：缺少必要元素。', { track, slideCount: slides.length, prevBtn, nextBtn });
+            return;
+          }
+
+          let current = 0;
+
+          function update() {
+            track.style.transform = `translateX(-${current * 100}%)`;
+            // 切换时只播放当前 slide 的视频，其他 pause（避免同时播放）
+            slides.forEach((slide, i) => {
+              const vids = slide.querySelectorAll('video');
+              vids.forEach(v => {
+                try {
+                  if (i === current) {
+                    // 尝试播放（浏览器可能阻止非用户交互的 autoplay，但我们已把 muted 设为 true）
+                    v.play().catch(() => {/* ignore */ });
+                  } else {
+                    v.pause();
+                    // v.currentTime = 0; // 如果希望每次都从头开始，取消注释
+                  }
+                } catch (e) { /* ignore */ }
+              });
+            });
+          }
+
+          function goTo(index) {
+            current = (index + slides.length) % slides.length;
+            update();
+          }
+
+          nextBtn.addEventListener('click', () => goTo(current + 1));
+          prevBtn.addEventListener('click', () => goTo(current - 1));
+
+          // 键盘左右切换
+          carousel.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') prevBtn.click();
+            if (e.key === 'ArrowRight') nextBtn.click();
+          });
+
+          // 可选：自动播放（如需开启把 data-autoplay="false" 改为 "true"）
+          if (carousel.dataset.autoplay === 'true') {
+            let auto = setInterval(() => goTo(current + 1), 13000);
+            carousel.addEventListener('mouseenter', () => clearInterval(auto));
+            carousel.addEventListener('mouseleave', () => auto = setInterval(() => goTo(current + 1), 13000));
+          }
+
+          // 初始化
+          goTo(0);
         });
-
-        document.querySelector('.prev').addEventListener('click', () => {
-          currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-          updateCarousel();
-        });
-
-        // 自动播放（可选）
-        setInterval(() => {
-          currentSlide = (currentSlide + 1) % slides.length;
-          updateCarousel();
-        }, 13000);
       </script>
+      <!-- === End carousel === -->
+
 
 
     </div>
