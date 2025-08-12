@@ -2,94 +2,18 @@ body {
   font-family: 'Noto Sans', sans-serif;
 }
 
-.red-text {
-    color: red;
-}
-
-.purple-text {
-   color: purple;
-}
-
-.orange-text {
-   color: rgb(231,118,41);
-}
 
 .footer .icon-link {
     font-size: 25px;
     color: #000;
 }
-.navigation-dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.dot {
-    height: 10px;
-    width: 10px;
-    margin: 0 8px; /* Increased margin for more space */
-    background-color: gray; /* Change color as needed */
-    border-radius: 50%;
-    display: inline-block;
-    cursor: default; /* Change cursor to indicate non-clickable */
-    transition: transform 0.2s; /* Smooth transition for scaling */
-}
 
-.dot.active {
-    background-color: purple; /* Change color for the active dot */
-    transform: scale(1.0); /* Zoom in the active dot */
-    z-index: 1; /* Ensure the active dot appears above others */
-}
-
-.dot:hover {
-    transform: scale(1.2); /* Slightly enlarge on hover */
-}
-.slideshow-container {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
-}
-
-.slide {
-    display: none;
-    width: 100%;
-}
-.slide.active {
-    display: block; /* Show active slide */
-}
-
-.active {
-    display: block;
-}
-
-.navigation-buttons {
-    display: flex;
-    justify-content: space-between; /* Distribute buttons evenly */
-    margin-top: 10px; /* Add space above buttons */
-}
-
-
-.button {
-    cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-}
-
-.prev {
-    /* Remove left positioning */
-}
-
-.next {
-    /* Remove right positioning */
-}
-.link-block {
+.link-block a {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-.dnerf {
+.nada {
   font-variant: small-caps;
 }
 
@@ -103,20 +27,19 @@ body {
   font-family: 'Google Sans', sans-serif;
 }
 
+.teaser video {
+    /* text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%; */
 
-.publication-title {
-
+    width: 140%; /* 设置宽度为120%，使其比容器宽 */
+    max-width: none; /* 确保宽度不会被限制 */
+    height: auto; /* 保持视频的纵横比 */
+    margin-left: -20%; /* 负的左外边距，使视频居中 */
 }
 
-.title.is-3 {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	font-family: 'Varela Round', sans-serif;
-	color: #4d4d4d;
-	font-size: 30px;
-	line-height: 65px;
-	font-weight: 700;
-	letter-spacing: 4;
+.publication-title {
 }
 
 .publication-banner {
@@ -136,14 +59,12 @@ body {
 }
 
 .publication-title {
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-family: 'Varela Round', sans-serif;
-    color: #4d4d4d;
-    font-size: 50px;
-    line-height: 65px;
-    font-weight: 700;
-    letter-spacing: 4;
+    font-family: 'Google Sans', sans-serif;
+}
+
+.section-title {
+    text-align: center;
+    /* padding-bottom: 1rem; */
 }
 
 .publication-authors {
@@ -194,6 +115,22 @@ body {
     border-radius: 10px !important;
 }
 
+.publication-img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.publication-video-small {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 1rem;
+    padding-bottom: 75.00%;
+
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
 .publication-video iframe {
     position: absolute;
     top: 0;
@@ -210,16 +147,48 @@ body {
 }
 
 .results-carousel .item {
-  margin: 5px;
+  /* margin: 5px;
   overflow: hidden;
+  padding: 0px 30px 0px 30px;
+  font-size: 0; */
+  width: 100%; /* 或者你可以设置一个具体的像素值，例如 3000px */
+  max-width: 3000px; /* 设置最大宽度 */
+  margin: 0 auto; /* 使组件居中 */
+}
+
+.results-carousel .item .carousel-content {
+    /* padding: 0px 0 12px 0;
+    border-radius: 10px; */
+    width: 100%; /* 图片宽度适应父容器 */
+    height: auto; /* 保持图片比例 */
+}
+
+.unpad {
+    margin-bottom: -10%
+}
+
+.bullets {
+    bottom: 10px;
+}
+
+.side-by-side {
+    width: 50%;
+}
+
+.results-carousel img {
   border: 1px solid #bbb;
   border-radius: 10px;
-  padding: 0;
-  font-size: 0;
+  width: 100%;
+  max-width: 4096px;
 }
 
 .results-carousel video {
   margin: 0;
+
+}
+
+.animals {
+    aspect-ratio: 512 / 364;
 }
 
 
@@ -249,4 +218,57 @@ body {
 }
 #interpolation-image-wrapper img {
   border-radius: 5px;
+}
+
+#results-carousel-face {
+   width: 120%;
+   height: 120%;
+   margin: 0 0 0 -10%;
+}
+
+.wide-image {
+  width: 140%; /* 设置宽度为120%，使其比容器宽 */
+  max-width: none; /* 确保宽度不会被限制 */
+  height: auto; /* 保持图片的纵横比 */
+  margin-left: -20%; /* 负的左外边距，使图片居中 */
+}
+
+.custom-font {
+  font-family: 'Raleway', sans-serif;
+}
+
+#teaser {
+    /* text-align: center;
+    margin-left: 10%;
+    margin-right: 10%;
+    width: 80%; */
+
+    width: 140%; /* 设置宽度为120%，使其比容器宽 */
+    max-width: none; /* 确保宽度不会被限制 */
+    height: auto; /* 保持视频的纵横比 */
+    margin-left: -20%; /* 负的左外边距，使视频居中 */
+}
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.item {
+  min-width: 100%;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-content img {
+  width: 100%;
+  display: block;
+}
+
+.x-gradient-font {
+  background: linear-gradient(107deg, #161616, #DD2476, #FF9A44);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

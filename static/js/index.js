@@ -1,6 +1,6 @@
 window.HELP_IMPROVE_VIDEOJS = false;
 
-var INTERP_BASE = "./static/interpolation/stacked";
+var INTERP_BASE = "https://homes.cs.washington.edu/~kpar/nerfies/interpolation/stacked";
 var NUM_INTERP_FRAMES = 240;
 
 var interp_images = [];
@@ -31,7 +31,7 @@ $(document).ready(function() {
 
     var options = {
 			slidesToScroll: 1,
-			slidesToShow: 3,
+			slidesToShow: 1,
 			loop: true,
 			infinite: true,
 			autoplay: false,
@@ -76,3 +76,39 @@ $(document).ready(function() {
     bulmaSlider.attach();
 
 })
+
+
+// document.addEventListener('DOMContentLoaded', () => {
+//   const carousels = document.querySelectorAll('.carousel.results-carousel');
+
+//   carousels.forEach(carousel => {
+//     const items = carousel.querySelectorAll('.item');
+//     const totalItems = items.length;
+//     let currentIndex = 0;
+
+//     // Clone the first item and append it to the end
+//     const firstItemClone = items[0].cloneNode(true);
+//     carousel.appendChild(firstItemClone);
+
+//     function showNextItem() {
+//       currentIndex++;
+//       items.forEach((item, index) => {
+//         item.style.transition = 'transform 0.5s ease-in-out';
+//         item.style.transform = `translateX(-${100 * currentIndex}%)`;
+//       });
+
+//       // If we've reached the cloned first item, reset to the original first item
+//       if (currentIndex === totalItems) {
+//         setTimeout(() => {
+//           items.forEach((item, index) => {
+//             item.style.transition = 'none';
+//             item.style.transform = `translateX(0)`;
+//           });
+//           currentIndex = 0;
+//         }, 500); // Match the transition duration
+//       }
+//     }
+
+//     setInterval(showNextItem, 3000); // 每3秒切换一次
+//   });
+// });
