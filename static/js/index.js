@@ -1,114 +1,99 @@
-window.HELP_IMPROVE_VIDEOJS = false;
+(() => {
+  'use strict';
 
-var INTERP_BASE = "https://homes.cs.washington.edu/~kpar/nerfies/interpolation/stacked";
-var NUM_INTERP_FRAMES = 240;
+  // All panels remain readable when JavaScript is unavailable.
+  document.querySelectorAll('[data-tabs]').forEach((group) => {
+    const tabList = group.querySelector('.tab-list');
+    const buttons = [...tabList.querySelectorAll('[data-tab]')];
+    const panels = buttons.map((button) => document.getElementById(button.dataset.tab));
+    tabList.setAttribute('role', 'tablist');
 
-var interp_images = [];
-function preloadInterpolationImages() {
-  for (var i = 0; i < NUM_INTERP_FRAMES; i++) {
-    var path = INTERP_BASE + '/' + String(i).padStart(6, '0') + '.jpg';
-    interp_images[i] = new Image();
-    interp_images[i].src = path;
+    const activate = (selectedIndex, focus = false) => {
+      buttons.forEach((button, index) => {
+        const selected = selectedIndex === index;
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+        panels[index].hidden = !selected;
+        if (!selected) panels[index].querySelectorAll('video').forEach((video) => video.pause());
+      });
+      if (focus) buttons[selectedIndex].focus();
+    };
+
+    buttons.forEach((button, index) => {
+      button.id = `tab-${button.dataset.tab}`;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-controls', panels[index].id);
+      panels[index].setAttribute('role', 'tabpanel');
+      panels[index].setAttribute('aria-labelledby', button.id);
+      panels[index].tabIndex = 0;
+      button.addEventListener('click', () => activate(index));
+      button.addEventListener('keydown', (event) => {
+        let next;
+        if (event.key === 'ArrowRight') next = (index + 1) % buttons.length;
+        if (event.key === 'ArrowLeft') next = (index - 1 + buttons.length) % buttons.length;
+        if (event.key === 'Home') next = 0;
+        if (event.key === 'End') next = buttons.length - 1;
+        if (next !== undefined) {
+          event.preventDefault();
+          activate(next, true);
+        }
+      });
+    });
+    activate(0);
+  });
+
+  const dialog = document.getElementById('figure-dialog');
+  if (dialog && typeof dialog.showModal === 'function') {
+    const enlarged = document.getElementById('enlarged-figure');
+    const original = document.getElementById('figure-original');
+    let trigger;
+    document.querySelectorAll('[data-lightbox]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        trigger = link;
+        enlarged.src = link.href;
+        enlarged.alt = link.querySelector('img').alt;
+        original.href = link.href;
+        dialog.showModal();
+        dialog.scrollTop = 0;
+        document.body.classList.add('dialog-open');
+      });
+    });
+    document.getElementById('close-figure').addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      const bounds = dialog.getBoundingClientRect();
+      if (event.target === dialog && (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom)) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      document.body.classList.remove('dialog-open');
+      if (trigger) trigger.focus({ preventScroll: true });
+    });
   }
-}
 
-function setInterpolationImage(i) {
-  var image = interp_images[i];
-  image.ondragstart = function() { return false; };
-  image.oncontextmenu = function() { return false; };
-  $('#interpolation-image-wrapper').empty().append(image);
-}
-
-
-$(document).ready(function() {
-    // Check for click events on the navbar burger icon
-    $(".navbar-burger").click(function() {
-      // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-      $(".navbar-burger").toggleClass("is-active");
-      $(".navbar-menu").toggleClass("is-active");
-
+  const copyButton = document.getElementById('copy-citation');
+  const citation = document.getElementById('bibtex');
+  const status = document.getElementById('copy-status');
+  if (copyButton && citation) {
+    copyButton.hidden = false;
+    copyButton.addEventListener('click', async () => {
+      try {
+        if (!navigator.clipboard || !window.isSecureContext) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(citation.textContent.trim());
+        copyButton.textContent = 'Copied ✓';
+        status.textContent = 'BibTeX copied to clipboard.';
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(citation);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        status.textContent = 'Citation selected. Press Ctrl+C or ⌘C to copy.';
+      }
     });
+  }
 
-    var options = {
-			slidesToScroll: 1,
-			slidesToShow: 1,
-			loop: true,
-			infinite: true,
-			autoplay: false,
-			autoplaySpeed: 3000,
-    }
-
-		// Initialize all div with carousel class
-    var carousels = bulmaCarousel.attach('.carousel', options);
-
-    // Loop on each carousel initialized
-    for(var i = 0; i < carousels.length; i++) {
-    	// Add listener to  event
-    	carousels[i].on('before:show', state => {
-    		console.log(state);
-    	});
-    }
-
-    // Access to bulmaCarousel instance of an element
-    var element = document.querySelector('#my-element');
-    if (element && element.bulmaCarousel) {
-    	// bulmaCarousel instance is available as element.bulmaCarousel
-    	element.bulmaCarousel.on('before-show', function(state) {
-    		console.log(state);
-    	});
-    }
-
-    /*var player = document.getElementById('interpolation-video');
-    player.addEventListener('loadedmetadata', function() {
-      $('#interpolation-slider').on('input', function(event) {
-        console.log(this.value, player.duration);
-        player.currentTime = player.duration / 100 * this.value;
-      })
-    }, false);*/
-    preloadInterpolationImages();
-
-    $('#interpolation-slider').on('input', function(event) {
-      setInterpolationImage(this.value);
-    });
-    setInterpolationImage(0);
-    $('#interpolation-slider').prop('max', NUM_INTERP_FRAMES - 1);
-
-    bulmaSlider.attach();
-
-})
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   const carousels = document.querySelectorAll('.carousel.results-carousel');
-
-//   carousels.forEach(carousel => {
-//     const items = carousel.querySelectorAll('.item');
-//     const totalItems = items.length;
-//     let currentIndex = 0;
-
-//     // Clone the first item and append it to the end
-//     const firstItemClone = items[0].cloneNode(true);
-//     carousel.appendChild(firstItemClone);
-
-//     function showNextItem() {
-//       currentIndex++;
-//       items.forEach((item, index) => {
-//         item.style.transition = 'transform 0.5s ease-in-out';
-//         item.style.transform = `translateX(-${100 * currentIndex}%)`;
-//       });
-
-//       // If we've reached the cloned first item, reset to the original first item
-//       if (currentIndex === totalItems) {
-//         setTimeout(() => {
-//           items.forEach((item, index) => {
-//             item.style.transition = 'none';
-//             item.style.transform = `translateX(0)`;
-//           });
-//           currentIndex = 0;
-//         }, 500); // Match the transition duration
-//       }
-//     }
-
-//     setInterval(showNextItem, 3000); // 每3秒切换一次
-//   });
-// });
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) document.querySelectorAll('video').forEach((video) => video.pause());
+  });
+})();

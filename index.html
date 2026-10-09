@@ -1,487 +1,176 @@
-<!DOCTYPE html>
-<html>
-
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="description"
-    content="HumanGenesis: Agent-Based Geometric and Generative Modeling for Synthetic Human Dynamics">
-  <meta name="keywords" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HumanGenesis: Agent-Based Geometric and Generative Modeling for Synthetic Human Dynamics</title>
-
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
-
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/dressing.svg ">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
-
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="theme-color" content="#174c43">
+ <title>CAL | Collaborative Real2Sim–Sim2Real Agential Learning</title>
+ <meta name="description" content="CAL unifies human–scene Gaussian reconstruction, motion guidance, multimodal critique, and video diffusion for geometric and generative human dynamics.">
+ <meta name="keywords" content="CAL, human dynamics, 3D Gaussian splatting, video diffusion, pose-guided video synthesis, collaborative agential learning">
+ <link rel="canonical" href="https://liwq229.github.io/humangenesis/">
+ <meta property="og:type" content="website">
+ <meta property="og:title" content="CAL: Geometric and Generative Human Dynamics">
+ <meta property="og:description" content="Four specialized agents. Two feedback paths. A unified framework for animatable humans and coherent human–scene videos.">
+ <meta property="og:url" content="https://liwq229.github.io/humangenesis/">
+ <meta property="og:image" content="https://liwq229.github.io/humangenesis/static/images/social-preview.jpg">
+ <meta property="og:image:alt" content="CAL applications: novel-motion animation and target-scene reenactment">
+ <meta name="twitter:card" content="summary_large_image">
+ <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+ <link rel="stylesheet" href="static/css/index.css">
+ <script src="static/js/index.js" defer></script>
 </head>
-
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title"><span style="
-            font-weight: bold;
-              background: linear-gradient(107deg, orange, yellow, green, blue);
-            -webkit-background-clip: text;
-            color: transparent;
-          ">
-              HumanGenesis
-            </span>
-            : Agent-Based Geometric and Generative Modeling for Synthetic Human Dynamics</h1>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block"> Weiqi Li<sup>1</sup>,</span>
-              <span class="author-block"> Zehao Zhang<sup>2</sup>,</span>
-              <span class="author-block"> Liang Lin<sup>1,3,4</sup>,</span>
-              <span class="author-block"> Guangrun Wang<sup>1,3,4</sup></span>
-            </div>
-            <div class="is-size-5 publication-authors">
-              <span class="author-block"><sup>1</sup>Sun Yat-sen University,</span>&nbsp;
-              <span class="author-block"><sup>2</sup>Yonsei University,</span>&nbsp;
-              <span class="author-block"><sup>3</sup>X-Era AI Lab,</span>&nbsp;
-              <span class="author-block"><sup>4</sup> Guangdong Key Laboratory of Big Data Analysis and Processing</span>&nbsp;
-            </div>
-        </div>
-      </div>
-    </div>
+<body>
+ <a class="skip-link" href="#main">Skip to content</a>
+ <header class="site-header">
+  <div class="nav-inner">
+   <a class="wordmark" href="#top" aria-label="CAL home"><span class="brand-symbol" aria-hidden="true">c<span>↗</span></span> CAL<span class="wordmark-detail"> / HUMAN DYNAMICS</span></a>
+   <nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#videos">Videos</a></nav>
+   <a class="nav-paper" href="static/papers/CAL_IJCV.pdf">Read paper <span aria-hidden="true">↗</span></a>
   </div>
-  </div>
-  </div>
-</section>
-
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <img src="static/teaser.png" alt="" style="width:1080px; height:auto;" />
-
-      <div class="content has-text-justified">
-        <p>
-          <b><i>Compelling applications</i></b> of our proposed method in human dynamics synthesis highlight four key
-          strengths: temporal consistency, geometric plausibility, expressive motion handling, and seamless integration
-          into target scenes. These capabilities enable a wide range of applications, including but not limited to: (a)
-          animating characters with novel motions—either drawn from motion capture datasets such as
-          AMASS or synthesized from textual descriptions; and (b) video reenactment, where characters are smoothly
-          inserted into target scenes and animated according to predefined
-          motion trajectories.
-        </p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-2" style="font-family: Comic Sans MS; 
-            font-weight: bold; 
-            background: linear-gradient(107deg, orange, yellow, green, blue); 
-            -webkit-background-clip: text; 
-            color: transparent;">
-          Abstract
-        </h2>
-        <div class="content has-text-justified">
-          <p>
-            <i><b>Synthetic human dynamics</i></b> aims to generate photorealistic videos of human subjects performing
-            expressive, intention-driven motions. However, current approaches face two core challenges: (1) geometric
-            inconsistency and coarse reconstruction, due to limited 3D modeling and detail preservation; and (2)
-            motion generalization limitations and scene inharmonization, stemming from weak generative capabilities.
-            To address these, we present <i><b>HumanGenesis</i></b>, a framework that integrates geometric and
-            generative
-            modeling through four collaborative agents:
-            (1) <i><b>Reconstructor</i></b> builds 3D-consistent human-scene representations from monocular video using
-            3D Gaussian Splatting and deformation decomposition.
-            (2) <i><b>Critique Agent</i></b> enhances reconstruction fidelity by identifying and refining poor regions
-            via multi-round MLLM-based reflection.
-            (3) <i><b>Pose Guider</i></b> enables motion generalization by generating expressive pose sequences using
-            time-aware parametric encoders.
-            (4) <i><b>Video Harmonizer</i></b> synthesizes photorealistic, coherent video via a hybrid rendering
-            pipeline
-            with diffusion, refining the Reconstructor through a Back-to-4D feedback loop.
-            HumanGenesis achieves state-of-the-art performance on tasks including text-guided synthesis, video
-            reenactment, and novel-pose generalization, significantly improving expressiveness, geometric fidelity,
-            and scene integration.
-          </p>
-        </div>
-      </div>
-      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-      <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    </div>
-  </div>
-  </div>
-</section>
-
-<section class="section hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-">
-          <h2 class="title is-2" style="font-family: Comic Sans MS; 
-            font-weight: bold; 
-            background: linear-gradient(107deg, orange, yellow, green, blue); 
-            -webkit-background-clip: text; 
-            color: transparent;">
-            Method
-          </h2>
-          <div class="columns is-centered has-text-justified">
-            <td colspan="3">
-              <img src="static/framework.png" alt="" width="1600" />
-            </td>
-          </div>
-          <div class="content has-text-justified">
-            The <strong>Reconstructor</strong> first recovers the 3D human and scene from monocular video by modeling
-            rigid and non-rigid deformations.
-            The <strong>Critique Agent</strong> then evaluates the rendered outputs to identify and refine low-quality
-            regions, enabling fine-grained reconstruction.
-            Next, the <strong>Pose Guider</strong> generates temporally-aware embeddings from novel parametric pose
-            sequences using a time-aware encoder, allowing expressive motion synthesis.
-            Finally, the <strong>Video Harmonizer</strong> leverages Spatial Feature Transform (SFT) within a video
-            diffusion pipeline to produce photorealistic sequences and forms a feedback loop that enhances the
-            Reconstructor’s input.
-          </div>
-        </div>
-</section>
-
-<section class="section hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column custom-width">
-          <h2 class="title is-2" style="font-family: Comic Sans MS; 
-            font-weight: bold; 
-            background: linear-gradient(107deg, orange, yellow, green, blue); 
-            -webkit-background-clip: text; 
-            color: transparent;">Comparisons with sota Methods</h2>
-          <div class="content has-text-centered">
-            <td colspan="3">
-              <img src="static/main.png" alt="" width="2160" />
-              <p>
-                <b>Qualitative comparisons</b> with state-of-the-art methods.
-              </p>
-            </td>
-          </div>
-        </div>
-      </div>
-</section>
-
-<section class="section">
-
-  <hr>
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-full-width">
-      <!-- === HumanGenesis 视频轮播 (替换原来的视频块) === -->
-      <div id="hg-carousel" class="hg-carousel" tabindex="0" data-autoplay="false">
-        <button class="hg-carousel-btn hg-carousel-prev" aria-label="Previous slide">&#10094;</button>
-
-        <div class="hg-carousel-viewport">
-          <div class="hg-carousel-track">
-            <!-- Slide 1 -->
-            <div class="hg-carousel-slide">
-              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
-             background: linear-gradient(107deg, orange, yellow, green, blue);
-             -webkit-background-clip: text; color: transparent; text-align: center;">
-                Expressive Human Dynamics
-              </h2>
-              <video controls muted loop playsinline style="width:40%; max-width:420px;">
-                <source src="./humanGenesis/videos/motion_misc_dancing_hiphop_1.mp4" type="video/mp4">
-              </video>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="hg-carousel-slide">
-              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
-             background: linear-gradient(107deg, orange, yellow, green, blue);
-             -webkit-background-clip: text; color: transparent; text-align: center;">
-                Comparisons
-              </h2>
-              <video controls muted loop playsinline style="width:45%; max-width:640px;">
-                <source src="./humanGenesis/videos/comparison_000.mp4" type="video/mp4">
-              </video>
-            </div>
-
-            <!-- Slide 4: 多视频并排 -->
-            <div class="hg-carousel-slide">
-              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
-             background: linear-gradient(107deg, orange, yellow, green, blue);
-             -webkit-background-clip: text; color: transparent; text-align: center;">
-                Multi-video consistency on HumanVid Dataset
-              </h2>
-              <div class="hg-multi-videos">
-                <video controls muted loop playsinline style="width:40%; max-width:480px;">
-                  <source src="./humanGenesis/videos/mvc_000.mp4" type="video/mp4">
-                </video>
-                <video controls muted loop playsinline style="width:40%; max-width:480px;">
-                  <source src="./humanGenesis/videos/mvc_001.mp4" type="video/mp4">
-                </video>
-              </div>
-            </div>
-
-            <!-- Slide 5 -->
-            <div class="hg-carousel-slide">
-              <h2 class="title is-2" style="font-family: Comic Sans MS; font-weight: bold;
-             background: linear-gradient(107deg, orange, yellow, green, blue);
-             -webkit-background-clip: text; color: transparent; text-align: center;">
-                Animated by unseen motions
-                <span style="all: unset; font-size: 0.8em; color: black;">(e.g. text-generated motion)</span>
-              </h2>
-              <video controls muted loop playsinline style="width:50%; max-width:640px;">
-                <source src="./humanGenesis/videos/animation.mp4" type="video/mp4">
-              </video>
-            </div>
-
-          </div> <!-- /.hg-carousel-track -->
-        </div> <!-- /.hg-carousel-viewport -->
-
-        <button class="hg-carousel-btn hg-carousel-next" aria-label="Next slide">&#10095;</button>
-      </div>
-
-      <style>
-        /* 基础样式（尽量加前缀避免冲突） */
-        #hg-carousel {
-          position: relative;
-          width: 100%;
-          margin: 20px 0;
-        }
-
-        #hg-carousel .hg-carousel-viewport {
-          overflow: hidden;
-        }
-
-        #hg-carousel .hg-carousel-track {
-          display: flex;
-          transition: transform 0.5s ease;
-        }
-
-        #hg-carousel .hg-carousel-slide {
-          flex: 0 0 100%;
-          box-sizing: border-box;
-          padding: 24px;
-          text-align: center;
-        }
-
-        #hg-carousel .hg-multi-videos {
-          display: flex;
-          gap: 10px;
-          justify-content: center;
-          align-items: center;
-          flex-wrap: wrap;
-        }
-
-        /* 按钮 */
-        .hg-carousel-btn {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          background: rgba(0, 0, 0, 0.45);
-          color: #fff;
-          border: none;
-          padding: 10px 12px;
-          cursor: pointer;
-          z-index: 9999;
-          border-radius: 6px;
-          font-size: 20px;
-        }
-
-        .hg-carousel-prev {
-          left: 8px;
-        }
-
-        .hg-carousel-next {
-          right: 8px;
-        }
-
-        /* 保证按钮在移动端不会被其他元素覆盖 */
-        @media (max-width: 768px) {
-          .hg-carousel-btn {
-            padding: 8px 10px;
-            font-size: 18px;
-          }
-
-          #hg-carousel .hg-carousel-slide {
-            padding: 14px;
-          }
-        }
-      </style>
-
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const carousel = document.getElementById('hg-carousel');
-          if (!carousel) return;
-
-          const track = carousel.querySelector('.hg-carousel-track');
-          const slides = Array.from(carousel.querySelectorAll('.hg-carousel-slide'));
-          const prevBtn = carousel.querySelector('.hg-carousel-prev');
-          const nextBtn = carousel.querySelector('.hg-carousel-next');
-
-          if (!track || slides.length === 0 || !prevBtn || !nextBtn) {
-            console.warn('[HG Carousel] 初始化失败：缺少必要元素。', { track, slideCount: slides.length, prevBtn, nextBtn });
-            return;
-          }
-
-          let current = 0;
-
-          function update() {
-            track.style.transform = `translateX(-${current * 100}%)`;
-            // 切换时只播放当前 slide 的视频，其他 pause（避免同时播放）
-            slides.forEach((slide, i) => {
-              const vids = slide.querySelectorAll('video');
-              vids.forEach(v => {
-                try {
-                  if (i === current) {
-                    // 尝试播放（浏览器可能阻止非用户交互的 autoplay，但我们已把 muted 设为 true）
-                    v.play().catch(() => {/* ignore */ });
-                  } else {
-                    v.pause();
-                    // v.currentTime = 0; // 如果希望每次都从头开始，取消注释
-                  }
-                } catch (e) { /* ignore */ }
-              });
-            });
-          }
-
-          function goTo(index) {
-            current = (index + slides.length) % slides.length;
-            update();
-          }
-
-          nextBtn.addEventListener('click', () => goTo(current + 1));
-          prevBtn.addEventListener('click', () => goTo(current - 1));
-
-          // 键盘左右切换
-          carousel.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') prevBtn.click();
-            if (e.key === 'ArrowRight') nextBtn.click();
-          });
-
-          // 可选：自动播放（如需开启把 data-autoplay="false" 改为 "true"）
-          if (carousel.dataset.autoplay === 'true') {
-            let auto = setInterval(() => goTo(current + 1), 13000);
-            carousel.addEventListener('mouseenter', () => clearInterval(auto));
-            carousel.addEventListener('mouseleave', () => auto = setInterval(() => goTo(current + 1), 13000));
-          }
-
-          // 初始化
-          goTo(0);
-        });
-      </script>
-      <!-- === End carousel === -->
-
-
-
-    </div>
-  </div>
-
-  <hr>
-
-  <!-- <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Reenactment</h2>
-        <div class="slideshow-container"
-          style="display: flex; justify-content: center; align-items: center; position: relative;">
-          <div style="position: relative;">
-            <video class="slide" controls autoplay loop muted style="width: 90%; max-width: 1300px; height: auto;">
-              <source src="./humanGenesis/videos/novel_scene3.mp4" type="video/mp4">
-            </video>
-            <video class="slide" controls autoplay loop muted style="width: 90%; max-width: 1300px; height: auto;">
-              <source src="./humanGenesis/videos/novel_scene1.mp4" type="video/mp4">
-            </video>
-            <video class="slide" controls autoplay loop muted style="width: 90%; max-width: 1300px; height: auto;">
-              <source src="./humanGenesis/videos/novel_scene2.mp4" type="video/mp4">
-            </video>
-            
-
-            <div class="navigation-dots"
-              style="margin-top: 15px; display: flex; justify-content: center; position: relative; z-index: 20;">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-
-            <button class="button prev" onclick="changeSlide(-1)"
-              style="margin-left: -100px;z-index: 10; position: absolute; left: 10px; top: 50%; transform: translateY(-50%);">
-              &#10094;
-            </button>
-            <button class="button next" onclick="changeSlide(1)"
-              style="margin-right: -100px;z-index: 10; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
-              &#10095;
-            </button>
-          </div>
+ </header>
+ <main id="main">
+  <section class="hero container" id="top" aria-labelledby="paper-title">
+   <p class="eyebrow"><span class="status-dot"></span> CAL · COLLABORATIVE AGENTIAL LEARNING</p>
+   <h1 id="paper-title">Collaborative <span class="title-accent">Real2Sim–Sim2Real</span><br class="desktop-break"> Agential Learning for Geometric<br class="desktop-break"> and Generative Human Dynamics</h1>
+   <p class="hero-summary">From a monocular video to an animatable human and scene.<br>Geometry guides generation. Visual feedback refines geometry.</p>
+   <div class="authors" aria-label="Authors"><span>Weiqi Li<sup>1</sup></span><span>Zehao Zhang<sup>2</sup></span><span>Liang Lin<sup>1,3,4</sup></span><span>Guangrun Wang<sup>1,3,4,*</sup></span></div>
+   <p class="affiliations"><span><sup>1</sup> Sun Yat-sen University</span><span><sup>2</sup> Yonsei University</span><span><sup>3</sup> X-Era AI Lab</span><span><sup>4</sup> Guangdong Key Laboratory of Big Data Analysis and Processing</span></p>
+   <p class="corresponding">* Corresponding author</p>
+   <div class="hero-actions"><a class="button button-primary" href="static/papers/CAL_IJCV.pdf"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M8 13h8M8 17h5"/></svg>Read the paper <span aria-hidden="true">↗</span></a><a class="button button-secondary" href="#videos"><span aria-hidden="true">▷</span> Watch results</a><a class="text-link" href="#citation">Cite this work <span aria-hidden="true">↓</span></a></div>
+   <div class="teaser-wrap"><div class="figure-topline"><span>ONE SUBJECT. NEW MOTIONS. NEW SCENES.</span><span>RESEARCH OVERVIEW / 01</span></div>
+<figure class="paper-figure teaser-figure">
+ <a class="figure-link" href="static/images/teaser.webp" data-lightbox aria-label="Enlarge: Novel-motion animation and video reenactment examples from CAL">
+ <img src="static/images/teaser.webp" alt="Novel-motion animation and video reenactment examples from CAL" width="2600" height="1705" loading="eager" decoding="async" fetchpriority="high">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption><strong>Human dynamics beyond the captured video.</strong> CAL animates a reconstructed subject with supplied motions and places the subject in target scenes, combining geometric control with generative appearance refinement.</figcaption></figure>
+   </div>
+   <div class="metric-strip" aria-label="Selected HumanVid results"><div class="metric-label"><span class="eyebrow">HUMANVID</span><span>Video synthesis<br>Selected results</span></div><div><strong>21.934 <small>dB</small></strong><span>PSNR ↑</span></div><div><strong>0.802</strong><span>SSIM ↑</span></div><div><strong>0.223</strong><span>LPIPS ↓</span></div><div><strong>76.20</strong><span>FID-VID ↓</span></div><a href="#results" aria-label="View benchmark results and evaluation protocol">View evaluation <span aria-hidden="true">↗</span></a></div>
   </section>
-  <footer class="footer">
-    <div class="container">
-      <div class="columns is-centered">
-        <div class="column is-8">
-          <div class="content">
-            <p>
-              This website is constructed using the source code provided by <a
-                href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>, and we are grateful for the template
-              they provided.
-              Allow us to express our appreciation for their contribution.
-            </p>
-          </div>
-        </div>
-      </div>
+
+  <section class="section container" id="overview" aria-labelledby="overview-title">
+   <div class="section-heading"><div><p class="eyebrow">01 / OVERVIEW</p><h2 id="overview-title">Geometry and generation,<br><span class="serif-emphasis">working together.</span></h2></div><p>Reconstruction, motion control, visual critique, and video synthesis exchange information through concrete geometric and generative feedback.</p></div>
+   <div class="overview-grid"><div class="abstract"><h3>Abstract</h3><p>Generating photorealistic, dynamic human–scene videos requires unifying geometric accuracy, motion expressiveness, and visual realism. While recent systems combine reconstruction, motion estimation, and diffusion-based generation, these modules often operate independently, leading to geometric drift and scene inconsistency. We introduce Collaborative Real2Sim–Sim2Real Agential Learning (CAL), a unified framework in which four specialized agents—Reconstruction, Motion Guidance, Consistency Critique, and Generation—exchange information through geometric and generative feedback. On the Real2Sim side, the Reconstruction Agent builds animatable human–scene Gaussian representations from monocular video, and the Motion Guidance Agent applies supplied poses and encodes rendered motion conditions. On the Sim2Real side, the Consistency Critique Agent assesses perceptual inconsistencies in rendered images and guides focused refinement, while the Generation Agent uses video diffusion to improve temporal appearance and human–scene integration. Localized critiques emphasize reconstruction losses in poorly reconstructed regions, and the Back-to-4D stage uses generated novel-view sequences as fixed pseudo-targets to refine the Gaussian model. Empirically, our system outperforms the evaluated baselines on human video synthesis and reconstruction benchmarks, while demonstrating strong capabilities in reenactment and pose generalization. These results highlight the effectiveness of Real2Sim–Sim2Real agential learning in producing temporally stable, expressive, and visually coherent human–scene dynamics.</p></div>
+   <aside class="contributions" aria-label="Key contributions"><h3>What CAL brings together</h3><ol>
+    <li><span>01</span><div><h4>A collaborative framework</h4><p>Four specialized modules connect geometric modeling and generative synthesis in a Real2Sim–Sim2Real workflow.</p></div></li>
+    <li><span>02</span><div><h4>Learnable motion transport</h4><p>Residual skinning weights and non-rigid Gaussian offsets support subject-specific deformation.</p></div></li>
+    <li><span>03</span><div><h4>Critique-to-geometry refinement</h4><p>Localized multimodal feedback directs reconstruction losses toward poorly reconstructed regions.</p></div></li>
+    <li><span>04</span><div><h4>Back-to-4D distillation</h4><p>Generated novel-view sequences become fixed pseudo-targets for further Gaussian refinement.</p></div></li>
+   </ol></aside></div>
+   <div class="scope-note"><span>IN THIS WORK</span><p>“Sim” is an animatable digital human and static scene. Real2Sim builds and controls this representation; Sim2Real improves perceptual consistency and visual realism. Each agent is a specialized module in the pipeline.</p></div>
+  </section>
+
+  <section class="section section-tinted" id="method" aria-labelledby="method-title"><div class="container">
+   <div class="section-heading"><div><p class="eyebrow">02 / METHOD</p><h2 id="method-title">Four agents.<br><span class="serif-emphasis">A shared visual world.</span></h2></div><p>A monocular source video provides identity and scene appearance. Supplied poses and cameras control the animation; two feedback paths improve the reconstructed model.</p></div>
+<figure class="paper-figure framework-figure">
+ <a class="figure-link" href="static/images/framework.webp" data-lightbox aria-label="Enlarge: Complete CAL framework with Reconstruction and Motion Guidance on the Real2Sim side, and Consistency Critique and Generation on the Sim2Real side">
+ <img src="static/images/framework.webp" alt="Complete CAL framework with Reconstruction and Motion Guidance on the Real2Sim side, and Consistency Critique and Generation on the Sim2Real side" width="2600" height="959" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption><strong>The CAL framework.</strong> Geometric renderings condition video synthesis, localized critiques focus reconstruction updates, and generated novel views feed back into the Gaussian model.</figcaption></figure>
+   <div class="agent-grid">
+    <article class="agent-card"><span class="agent-side">REAL2SIM <span>01</span></span><h3>Reconstruction<br>Agent</h3><p>Recovers separate human and static-scene Gaussians. Learned non-rigid offsets and residual skinning corrections preserve subject-specific geometry under articulation.</p><span class="agent-output">OUTPUT / ANIMATABLE 3D REPRESENTATION</span></article>
+    <article class="agent-card"><span class="agent-side">REAL2SIM <span>02</span></span><h3>Motion Guidance<br>Agent</h3><p>Applies externally supplied pose sequences, renders the articulated human, and encodes those renderings into time-aware conditions for video generation.</p><span class="agent-output">OUTPUT / MOTION CONDITION FEATURES</span></article>
+    <article class="agent-card agent-warm"><span class="agent-side">SIM2REAL <span>03</span></span><h3>Consistency Critique<br>Agent</h3><p>A fixed Qwen2.5-VL-32B critic identifies inconsistent regions. Its boxes and feedback labels guide localized reconstruction-loss weighting over finite reflection rounds.</p><span class="agent-output">OUTPUT / LOCAL REFINEMENT SIGNALS</span></article>
+    <article class="agent-card agent-warm"><span class="agent-side">SIM2REAL <span>04</span></span><h3>Generation<br>Agent</h3><p>Video diffusion uses Spatial Feature Transform conditioning, temporal processing, and feature warping to improve appearance and human–scene integration.</p><span class="agent-output">OUTPUT / TEMPORALLY COHERENT VIDEO</span></article>
+   </div>
+   <div class="feedback-heading"><p class="eyebrow">THE FEEDBACK THAT CONNECTS THEM</p><h3>From visual observations to better geometry.</h3></div>
+   <div class="feedback-grid"><article><div class="feedback-label"><span>↺</span><h4>Critique → geometry</h4></div><p>Region-level feedback increases the weight of reconstruction losses in flagged areas, using the original images as supervision. Gradients update reconstruction parameters; they do not pass through the language-model response.</p><figure class="paper-figure ">
+ <a class="figure-link" href="static/images/critique.webp" data-lightbox aria-label="Enlarge: Iterative interaction between reconstruction and localized multimodal critique">
+ <img src="static/images/critique.webp" alt="Iterative interaction between reconstruction and localized multimodal critique" width="2600" height="1818" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption>The critic finds local errors; the reconstruction module revisits those regions.</figcaption></figure></article><article><div class="feedback-label"><span>↺</span><h4>Generation → Back-to-4D</h4></div><p>Render novel views, enhance them with the Generation Agent, then hold the generated sequences and video model fixed while optimizing the Gaussians. Iterative Latent Projection (ILP) refines appearance at new camera views.</p><figure class="paper-figure ">
+ <a class="figure-link" href="static/images/back-to-4d.webp" data-lightbox aria-label="Enlarge: Novel-camera comparisons before and after Back-to-4D generative distillation">
+ <img src="static/images/back-to-4d.webp" alt="Novel-camera comparisons before and after Back-to-4D generative distillation" width="2600" height="988" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption>Back-to-4D reduces artifacts in the illustrated novel-camera renderings.</figcaption></figure></article></div>
+  </div></section>
+
+  <section class="section container" id="results" aria-labelledby="results-title">
+   <div class="section-heading"><div><p class="eyebrow">03 / EVALUATION</p><h2 id="results-title">Measured quality.<br><span class="serif-emphasis">Visible detail.</span></h2></div><p>Video synthesis on HumanVid, human–scene reconstruction on NeuMan, and component ablations on MoVi evaluate complementary parts of the framework.</p></div>
+   <div class="tab-group results-tabs" data-tabs>
+    <div class="tab-list" aria-label="Evaluation benchmark"><button class="tab-button" type="button" data-tab="humanvid-results">HumanVid <span>Video synthesis</span></button><button class="tab-button" type="button" data-tab="neuman-results">NeuMan <span>Reconstruction</span></button><button class="tab-button" type="button" data-tab="ablation-results">Ablations <span>Component analysis</span></button></div>
+    <div id="humanvid-results" class="tab-panel"><h3 class="sr-only">HumanVid video synthesis</h3>
+<div class="table-scroll" role="region" aria-label="HumanVid · video synthesis comparison" tabindex="0"><table><caption>HumanVid · video synthesis comparison</caption><thead><tr><th scope="col">Method</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">LPIPS ↓</th><th scope="col">FID-VID ↓</th><th scope="col">User ↑</th></tr></thead><tbody><tr class=""><th scope="row">AnimateAnyone</th><td>16.102</td><td>0.633</td><td>0.398</td><td>99.49</td><td>2.482</td></tr><tr class=""><th scope="row">AniGS</th><td>18.974</td><td>0.649</td><td>0.373</td><td>86.62</td><td>3.136</td></tr><tr class=""><th scope="row">MIMO</th><td>20.845</td><td>0.783</td><td>0.266</td><td>82.34</td><td>3.504</td></tr><tr class=""><th scope="row">Champ</th><td>17.986</td><td>0.651</td><td>0.382</td><td>101.91</td><td>2.637</td></tr><tr class="ours"><th scope="row">CAL (ours)</th><td>21.934</td><td>0.802</td><td>0.223</td><td>76.20</td><td>4.103</td></tr></tbody></table></div>
+     <div class="protocol-note"><strong>Comparison protocol</strong><p>Videos are divided into subsequences with a stride of 10. CAL reconstructs the subject from the collection of first frames; each baseline uses one first-frame reference per subsequence. All methods are evaluated on test frames. The User score averages 1–5 ratings from 25 participants, each evaluating 15 sequences (375 participant–sequence evaluations per method).</p></div>
     </div>
-  </footer>
+    <div id="neuman-results" class="tab-panel"><h3 class="sr-only">NeuMan reconstruction</h3>
+<div class="table-scroll" role="region" aria-label="NeuMan · aggregate reconstruction comparison" tabindex="0"><table><caption>NeuMan · aggregate reconstruction comparison</caption><thead><tr><th scope="col">Method</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">LPIPS ↓</th></tr></thead><tbody><tr class=""><th scope="row">Vid2Avatar</th><td>0.566</td><td>16.192</td><td>0.637</td></tr><tr class=""><th scope="row">NeuMan</th><td>0.793</td><td>24.543</td><td>0.265</td></tr><tr class=""><th scope="row">HUGS</th><td>0.829</td><td>25.498</td><td>0.122</td></tr><tr class="ours"><th scope="row">CAL (ours)</th><td>0.891</td><td>26.992</td><td>0.081</td></tr></tbody></table></div>
+     <div class="protocol-note"><strong>Reconstruction benchmark</strong><p>CAL achieves the strongest aggregate scores among the evaluated methods. The paper also reports six individual NeuMan scenes and separate experiments on localized critique, reflection rounds, and critic model size.</p></div>
+    </div>
+    <div id="ablation-results" class="tab-panel"><h3 class="sr-only">Component ablations</h3>
+<div class="table-scroll" role="region" aria-label="MoVi · generation and Back-to-4D ablations" tabindex="0"><table><caption>MoVi · generation and Back-to-4D ablations</caption><thead><tr><th scope="col">Configuration</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">LPIPS ↓</th></tr></thead><tbody><tr class=""><th scope="row">Without CFW</th><td>0.848</td><td>25.692</td><td>0.107</td></tr><tr class=""><th scope="row">Without temporal convolution</th><td>0.821</td><td>25.311</td><td>0.141</td></tr><tr class=""><th scope="row">Without LSFT</th><td>0.816</td><td>24.978</td><td>0.155</td></tr><tr class=""><th scope="row">Without ILP / Back-to-4D</th><td>0.855</td><td>26.103</td><td>0.102</td></tr><tr class="ours"><th scope="row">Full CAL</th><td>0.873</td><td>26.335</td><td>0.092</td></tr></tbody></table></div>
+     <div class="protocol-note"><strong>Component definitions</strong><p>CFW: Controllable Feature Warping. LSFT: Latent Space Fine-Tuning. ILP: Iterative Latent Projection. Removing any of these components reduces performance in the reported MoVi experiment.</p></div>
+    </div>
+   </div>
+   <p class="table-footnote">Values are reproduced from the CAL manuscript. ↑ Higher is better. ↓ Lower is better. PSNR is measured in dB.</p>
+   <div class="result-block"><div class="subsection-heading"><h3>HumanVid qualitative comparison</h3><span>LARGE MOTION · APPEARANCE · SCENE INTEGRATION</span></div>
+<figure class="paper-figure comparison-figure">
+ <a class="figure-link" href="static/images/comparison.webp" data-lightbox aria-label="Enlarge: Four full rows comparing reference, AnimateAnyone, AniGS, MIMO, Champ, CAL, and ground truth on HumanVid">
+ <img src="static/images/comparison.webp" alt="Four full rows comparing reference, AnimateAnyone, AniGS, MIMO, Champ, CAL, and ground truth on HumanVid" width="2548" height="2600" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption><strong>Complex motion and changing viewpoints.</strong> The complete HumanVid comparison from the paper, including reference frames and ground truth. Open the figure to inspect faces, clothing, and body structure.</figcaption></figure>
+   </div>
+   <div class="paired-results"><article><h3>Fine-grained reconstruction</h3><figure class="paper-figure ">
+ <a class="figure-link" href="static/images/reconstruction.webp" data-lightbox aria-label="Enlarge: CAL, HUGS, and ground-truth reconstruction comparisons including feet–floor separation">
+ <img src="static/images/reconstruction.webp" alt="CAL, HUGS, and ground-truth reconstruction comparisons including feet–floor separation" width="2600" height="1756" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption>Localized refinement improves fine detail and separation between the person and the ground.</figcaption></figure></article><article><h3>Temporal generation</h3><figure class="paper-figure ">
+ <a class="figure-link" href="static/images/temporal.webp" data-lightbox aria-label="Enlarge: Ground truth, generation without latent space fine-tuning, and full CAL across a motion sequence">
+ <img src="static/images/temporal.webp" alt="Ground truth, generation without latent space fine-tuning, and full CAL across a motion sequence" width="2600" height="1587" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption>Latent Space Fine-Tuning helps retain human detail and consistent appearance under large motion.</figcaption></figure></article></div>
+   <details class="study-details"><summary>Explore agent contributions and reflection rounds <span aria-hidden="true">+</span></summary><div class="details-content">
+<div class="table-scroll" role="region" aria-label="End-to-end agent attribution" tabindex="0"><table><caption>End-to-end agent attribution</caption><thead><tr><th scope="col">Configuration</th><th scope="col">PSNR ↑</th><th scope="col">SSIM ↑</th><th scope="col">LPIPS ↓</th><th scope="col">FID-VID ↓</th><th scope="col">T-Cons ↑</th></tr></thead><tbody><tr class=""><th scope="row">Without Reconstruction</th><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr><tr class=""><th scope="row">Without Motion Guidance</th><td>20.58</td><td>0.768</td><td>0.281</td><td>84.91</td><td>0.86</td></tr><tr class=""><th scope="row">Without Critique</th><td>19.93</td><td>0.748</td><td>0.298</td><td>88.45</td><td>0.84</td></tr><tr class=""><th scope="row">Without Generation</th><td>20.41</td><td>0.758</td><td>0.294</td><td>88.72</td><td>0.84</td></tr><tr class="ours"><th scope="row">Full CAL</th><td>21.93</td><td>0.802</td><td>0.223</td><td>76.20</td><td>0.92</td></tr></tbody></table></div><p class="table-footnote">Removing Reconstruction makes the pipeline undefined. T-Cons is the paper’s flow-based temporal consistency score, normalized to [0, 1].</p>
+<div class="table-scroll" role="region" aria-label="NeuMan · critique reflection rounds" tabindex="0"><table><caption>NeuMan · critique reflection rounds</caption><thead><tr><th scope="col">Setting</th><th scope="col">SSIM ↑</th><th scope="col">PSNR ↑</th><th scope="col">LPIPS ↓</th></tr></thead><tbody><tr class=""><th scope="row">Initial</th><td>0.842</td><td>26.723</td><td>0.115</td></tr><tr class=""><th scope="row">Round 1</th><td>0.913</td><td>28.254</td><td>0.070</td></tr><tr class=""><th scope="row">Round 2</th><td>0.914</td><td>28.348</td><td>0.068</td></tr><tr class="ours"><th scope="row">Round 3</th><td>0.915</td><td>28.414</td><td>0.068</td></tr><tr class=""><th scope="row">Round 4</th><td>0.914</td><td>28.386</td><td>0.068</td></tr></tbody></table></div><p class="table-footnote">Round 3 achieves the highest PSNR and SSIM; LPIPS ties across Rounds 2–4. The additional fourth round gives no further benefit in this experiment.</p></div></details>
+  </section>
 
-  <script>
-    let currentSlideIndex = 0;
+  <section class="section section-tinted" id="applications" aria-labelledby="applications-title"><div class="container">
+   <div class="section-heading"><div><p class="eyebrow">04 / APPLICATIONS</p><h2 id="applications-title">One identity.<br><span class="serif-emphasis">More possibilities.</span></h2></div><p>Transfer a subject’s appearance to new supplied motions and target environments, with geometry providing the basis for control.</p></div>
+   <div class="tab-group application-tabs" data-tabs><div class="tab-list" aria-label="Application examples"><button class="tab-button" type="button" data-tab="novel-motion">Novel motion</button><button class="tab-button" type="button" data-tab="cross-video">Cross-video consistency</button><button class="tab-button" type="button" data-tab="reenactment">Scene reenactment</button></div>
+    <div class="tab-panel application-panel" id="novel-motion"><div class="application-copy"><span class="eyebrow">MOTION CONTROL</span><h3>New motion.<br>Familiar character.</h3><p>CAL applies motion-capture sequences from AMASS or text-generated poses from MoMask to a personalized avatar, retaining the reference subject’s appearance and clothing.</p><p class="muted">The motion trajectory comes from an external source. CAL animates and renders the subject under that guidance.</p></div>
+<figure class="paper-figure ">
+ <a class="figure-link" href="static/images/novel-motion.webp" data-lightbox aria-label="Enlarge: Subjects animated with novel motions from MoMask and AMASS, with reference videos and target-pose insets">
+ <img src="static/images/novel-motion.webp" alt="Subjects animated with novel motions from MoMask and AMASS, with reference videos and target-pose insets" width="1636" height="2600" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption>Reference videos appear on the left; sampled output frames and target-pose insets show the supplied motion.</figcaption></figure></div>
+    <div class="tab-panel application-panel" id="cross-video"><div class="application-copy"><span class="eyebrow">IDENTITY CONSISTENCY</span><h3>Different guidance.<br>The same subject.</h3><p>Multiple driving videos provide distinct pose sequences. CAL preserves the reference subject’s facial appearance, clothing details, and body proportions across the generated sequences.</p><p class="muted">The paper compares CAL with MIMO and AniGS using the same reference identity.</p></div>
+<figure class="paper-figure ">
+ <a class="figure-link" href="static/images/cross-video.webp" data-lightbox aria-label="Enlarge: Cross-video identity consistency comparing MIMO, AniGS, and CAL across two driving videos">
+ <img src="static/images/cross-video.webp" alt="Cross-video identity consistency comparing MIMO, AniGS, and CAL across two driving videos" width="2573" height="2600" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption>Two driving videos, one reference identity: comparison of appearance across motion sequences.</figcaption></figure></div>
+    <div class="tab-panel application-panel" id="reenactment"><div class="application-copy"><span class="eyebrow">HUMAN–SCENE COMPOSITION</span><h3>A new setting.<br>A coherent performance.</h3><p>The reconstructed human is placed in a target static scene and animated with supplied poses. The Generation Agent refines appearance for coherent human–scene video.</p><p class="muted">Each example pairs the target video with CAL’s reenactment, alongside the reference subject.</p></div>
+<figure class="paper-figure ">
+ <a class="figure-link" href="static/images/reenactment.webp" data-lightbox aria-label="Enlarge: Target-scene reenactment examples pairing target videos with CAL results and reference subjects">
+ <img src="static/images/reenactment.webp" alt="Target-scene reenactment examples pairing target videos with CAL results and reference subjects" width="1806" height="2600" loading="lazy" decoding="async">
+ <span class="zoom-label" aria-hidden="true">↗ View figure</span></a>
+ <figcaption>The same subject is animated in designated environments using predefined pose trajectories.</figcaption></figure></div>
+   </div>
+  </div></section>
 
-    function changeSlide(step) {
-      const slides = document.querySelectorAll('.slide');
-      const dots = document.querySelectorAll('.dot');
+  <section class="section video-section" id="videos" aria-labelledby="videos-title"><div class="container">
+   <div class="section-heading"><div><p class="eyebrow">05 / IN MOTION</p><h2 id="videos-title">See the dynamics.</h2></div><p>Expressive human motion, method comparisons, identity consistency, and animation with unseen poses.</p></div>
+   <div class="tab-group video-tabs" data-tabs><div class="tab-list" aria-label="Video demonstrations"><button class="tab-button" type="button" data-tab="video-expressive">Expressive motion</button><button class="tab-button" type="button" data-tab="video-comparison">Comparison</button><button class="tab-button" type="button" data-tab="video-consistency">Multi-video consistency</button><button class="tab-button" type="button" data-tab="video-animation">Unseen motion</button></div>
+    <div id="video-expressive" class="tab-panel video-panel"><h3>Expressive human dynamics</h3><video controls muted loop playsinline preload="metadata" aria-label="Expressive human dynamics demonstration"><source src="./humanGenesis/videos/motion_misc_dancing_hiphop_1.mp4" type="video/mp4">Your browser does not support embedded video. <a href="./humanGenesis/videos/motion_misc_dancing_hiphop_1.mp4">Download the video</a>.</video></div>
+    <div id="video-comparison" class="tab-panel video-panel"><h3>Method comparison</h3><video controls muted loop playsinline preload="metadata" aria-label="Human video synthesis method comparison"><source src="./humanGenesis/videos/comparison_000.mp4" type="video/mp4">Your browser does not support embedded video. <a href="./humanGenesis/videos/comparison_000.mp4">Download the video</a>.</video></div>
+    <div id="video-consistency" class="tab-panel video-panel"><h3>Multi-video consistency on HumanVid</h3><div class="multi-videos"><video controls muted loop playsinline preload="metadata" aria-label="First HumanVid consistency demonstration"><source src="./humanGenesis/videos/mvc_000.mp4" type="video/mp4">Your browser does not support embedded video. <a href="./humanGenesis/videos/mvc_000.mp4">Download the video</a>.</video><video controls muted loop playsinline preload="metadata" aria-label="Second HumanVid consistency demonstration"><source src="./humanGenesis/videos/mvc_001.mp4" type="video/mp4">Your browser does not support embedded video. <a href="./humanGenesis/videos/mvc_001.mp4">Download the video</a>.</video></div></div>
+    <div id="video-animation" class="tab-panel video-panel"><h3>Animation with unseen motion</h3><video controls muted loop playsinline preload="metadata" aria-label="Animation driven by unseen motions, including text-generated poses"><source src="./humanGenesis/videos/animation.mp4" type="video/mp4">Your browser does not support embedded video. <a href="./humanGenesis/videos/animation.mp4">Download the video</a>.</video></div>
+   </div>
+  </div></section>
 
-      slides[currentSlideIndex].style.display = 'none'; // Hide current slide
-      dots[currentSlideIndex].classList.remove('active'); // Remove active class from current dot
-
-      currentSlideIndex = (currentSlideIndex + step + slides.length) % slides.length;
-
-      slides[currentSlideIndex].style.display = 'block'; // Show new slide
-      dots[currentSlideIndex].classList.add('active'); // Add active class to new dot
-    }
-
-    // Initial setup to hide all slides except the first one
-    document.querySelectorAll('.slide').forEach((slide, index) => {
-      slide.style.display = (index === 0) ? 'block' : 'none'; // Show the first slide and hide others
-    });
-
-    // Automatically change slides every 10 seconds
-    setInterval(() => {
-      changeSlide(1);
-    }, 11000); // Change slide every 10 seconds
-
-    // Update display initially
-    document.querySelectorAll('.dot')[currentSlideIndex].classList.add('active'); // Set first dot active
-  </script> -->
-  <!-- </section> -->
-
+  <section class="section container closing-section" aria-label="Limitations and citation">
+   <div class="closing-grid"><div><p class="eyebrow">SCOPE & LIMITATIONS</p><h2>Where the method<br>can improve.</h2><p>CAL remains sensitive to inaccurate SMPL estimates, especially for facial expressions and fine hand motion. Complex or dynamic environments challenge its COLMAP initialization and static-scene representation.</p><p>Monocular coverage leaves uncertainty in unseen surfaces. Large pose or viewpoint changes, unreliable critique, or hallucinated generated details can affect subsequent refinement.</p><p class="responsible-note"><strong>Responsible use.</strong> Source imagery and the animated identity should be used with consent. Disclosing synthesized content and tracking its provenance can help mitigate identity misuse.</p></div>
+   <div class="citation-card" id="citation"><div class="citation-heading"><div><p class="eyebrow">REFERENCE</p><h2>Cite this work</h2></div><button type="button" class="copy-button" id="copy-citation" hidden>Copy BibTeX</button></div><p class="citation-note">Citation for the manuscript accompanying this project.</p><pre tabindex="0" aria-label="BibTeX citation"><code id="bibtex">@misc{li_cal,
+  title = {Collaborative {Real2Sim--Sim2Real}
+           Agential Learning for Geometric
+           and Generative Human Dynamics},
+  author = {Li, Weiqi and Zhang, Zehao and
+            Lin, Liang and Wang, Guangrun},
+  note = {Manuscript},
+  url = {https://liwq229.github.io/humangenesis/}
+}</code></pre><p id="copy-status" class="copy-status" role="status" aria-live="polite"></p><a class="text-link" href="static/papers/CAL_IJCV.pdf">Full paper and supplementary details <span aria-hidden="true">↗</span></a></div></div>
+  </section>
+ </main>
+ <footer class="site-footer"><div class="container footer-inner"><a class="wordmark" href="#top">CAL<span class="wordmark-detail"> / GEOMETRIC & GENERATIVE HUMAN DYNAMICS</span></a><div><a href="https://github.com/liwq229/humangenesis">Website source <span aria-hidden="true">↗</span></a><a href="#top">Back to top ↑</a></div></div><p class="container footer-credit">Original project page based on the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies template</a>.</p></footer>
+ <dialog id="figure-dialog" aria-labelledby="figure-dialog-title"><div class="dialog-toolbar"><h2 id="figure-dialog-title">Paper figure</h2><a id="figure-original" target="_blank" rel="noopener">Open original ↗</a><button type="button" id="close-figure" aria-label="Close enlarged figure">✕</button></div><div class="dialog-image-wrap"><img id="enlarged-figure" alt=""></div></dialog>
+</body>
 </html>
