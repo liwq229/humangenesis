@@ -3,7 +3,7 @@
 Project website for **Collaborative Real2Sim–Sim2Real Agential Learning for Geometric and Generative Human Dynamics**.
 
 - Website: https://liwq229.github.io/cal/
-- Manuscript: `static/papers/CAL_IJCV.pdf`
+- Paper links: https://liwq229.github.io/cal/
 - Entry point: `index.html`
 - Styling and interactions: `static/css/index.css`, `static/js/index.js`
 
@@ -13,7 +13,7 @@ From this directory, run `python3 -m http.server 8000` and open http://localhost
 
 ## Content provenance
 
-The content and numerical results follow the supplied `CAL_IJCV` manuscript. The downloadable PDF is an unchanged copy. Website figures are WebP renderings of the active manuscript figures, using each PDF's CropBox and retaining every panel:
+The content and numerical results follow the supplied `CAL_IJCV` manuscript. The website does not distribute the manuscript PDF; paper links point to the project homepage. Website figures are WebP renderings of the active manuscript figures, using each PDF's CropBox and retaining every panel:
 
 | Website image | Manuscript asset |
 | --- | --- |
