@@ -2,7 +2,7 @@
 
 Project website for **Collaborative Real2Sim–Sim2Real Agential Learning for Geometric and Generative Human Dynamics**.
 
-- Website: https://liwq229.github.io/humangenesis/
+- Website: https://liwq229.github.io/cal/
 - Manuscript: `static/papers/CAL_IJCV.pdf`
 - Entry point: `index.html`
 - Styling and interactions: `static/css/index.css`, `static/js/index.js`
